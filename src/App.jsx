@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import TodoWriteForm from './components/TodoWriteForm'
+import TodoList from './components/TodoList'
 
 function App() {
     const lastId = useRef(4)
@@ -30,21 +31,7 @@ function App() {
     return (
         <>
             <TodoWriteForm handleOnSubmit={handleOnSubmit} />
-            <ul>
-                {todos.map((todo) => (
-                    <li key={todo.id}>
-                        <input
-                            type="checkbox"
-                            onChange={() => {
-                                toggleTodo(todo.id)
-                            }}
-                            checked={todo.checked}
-                        />
-                        {JSON.stringify(todo.checked)} / {todo.id} / {todo.text}
-                        <button onClick={() => removeTodo(todo.id)}>X</button>
-                    </li>
-                ))}
-            </ul>
+            <TodoList todos={todos} removeTodo={removeTodo} toggleTodo={toggleTodo} />
         </>
     )
 }
